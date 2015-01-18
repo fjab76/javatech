@@ -8,6 +8,9 @@ public class Client {
     private String name;
     private String lastName;
 
+    public Client(){
+        super();
+    }
 
     public Client(String name, String lastName) {
         this.name = name;

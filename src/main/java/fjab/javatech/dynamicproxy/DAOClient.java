@@ -5,6 +5,7 @@ package fjab.javatech.dynamicproxy;
  */
 interface DAOClient {
 
-    boolean insertClient(Client client);
-    boolean deleteClient(Client client);
+    Boolean insertClient(Client client);
+    Boolean deleteClient(Client client);
+    Client findByName(String name);
 }

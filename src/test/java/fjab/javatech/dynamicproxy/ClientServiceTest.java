@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Method;
+
 import static org.junit.Assert.*;
 
 public class ClientServiceTest {
@@ -24,11 +26,13 @@ public class ClientServiceTest {
     public void clientIsCreated() throws Exception {
 
         //given
-        DAOClient daoClient = DAOClientMock.createMock();
+        DAOClient daoClient = MockGenerator.createMock(DAOClient.class, (Object proxy, Method method, Object[] args) -> {
+            return null;
+        });
         clientService.setDaoClient(daoClient);
 
         //when
-        boolean clientCreated = clientService.createClient(new Client("ok","bar"));
+        boolean clientCreated = clientService.createClient(new Client());
 
         //then
         assertTrue(clientCreated);
@@ -39,14 +43,65 @@ public class ClientServiceTest {
     public void clientIsNotCreated() throws Exception {
 
         //given
-        DAOClient daoClient = DAOClientMock.createMock();
+        DAOClient daoClient = MockGenerator.createMock(DAOClient.class, (Object proxy, Method method, Object[] args) -> {
+
+            if ("findByName".equals(method.getName())) {
+                return new Client();
+            }
+            //any other method returns null
+            else {
+                return null;
+            }
+
+        });
         clientService.setDaoClient(daoClient);
 
         //when
-        boolean clientCreated = clientService.createClient(new Client("ko","bar"));
+        boolean clientCreated = clientService.createClient(new Client());
 
         //then
         assertFalse(clientCreated);
+
+    }
+
+    @Test
+    public void insertClientIsCalledOnce() throws Exception {
+
+        //given
+        MutableInteger counter = new MutableInteger();
+        DAOClient daoClient = MockGenerator.createMock(DAOClient.class, (Object proxy, Method method, Object[] args) -> {
+
+            if ("insertClient".equals(method.getName())) {
+                counter.increment();
+            }
+
+            return null;
+        });
+        clientService.setDaoClient(daoClient);
+
+        //when
+        boolean clientCreated = clientService.createClient(new Client());
+
+        //then
+        assertEquals(1,counter.getValue());
+
+    }
+
+    private class MutableInteger{
+
+        private int value;
+
+        int getValue() {
+            return value;
+        }
+
+        void setValue(int value) {
+            this.value = value;
+        }
+
+        void increment(){
+            this.value += 1;
+        }
 
     }
 }

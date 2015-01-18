@@ -11,13 +11,16 @@ public class ClientService {
 
         System.out.println("running logic to create a client");
 
-        if(!daoClient.insertClient(client)){
+        if(daoClient.findByName(client.getName())==null){
+            daoClient.insertClient(client);
+
+            System.out.println("running remaining logic");
+            return true;
+        }
+        else{
+            System.out.println("WARNING: client already exists!!");
             return false;
         }
-
-        System.out.println("running remaining logic");
-
-        return true;
     }
 
     public void setDaoClient(DAOClient daoClient) {
