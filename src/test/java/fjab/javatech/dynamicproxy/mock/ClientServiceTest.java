@@ -1,4 +1,4 @@
-package fjab.javatech.dynamicproxy;
+package fjab.javatech.dynamicproxy.mock;
 
 import org.junit.After;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package fjab.javatech.dynamicproxy;
+package fjab.javatech.dynamicproxy.mock;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;

@@ -1,4 +1,4 @@
-package fjab.javatech.dynamicproxy;
+package fjab.javatech.dynamicproxy.mock;
 
 /**
  * Created by fjab on 16/01/15.
