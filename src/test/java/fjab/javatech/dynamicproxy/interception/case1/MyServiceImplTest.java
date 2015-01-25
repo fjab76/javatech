@@ -1,7 +1,8 @@
-package fjab.javatech.dynamicproxy.interception;
+package fjab.javatech.dynamicproxy.interception.case1;
 
+import fjab.javatech.dynamicproxy.interception.case1.MyService;
+import fjab.javatech.dynamicproxy.interception.case1.MyServiceFactory;
 import org.junit.Assert;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
