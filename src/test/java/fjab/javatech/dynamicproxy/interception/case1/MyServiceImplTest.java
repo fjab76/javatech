@@ -31,4 +31,25 @@ public class MyServiceImplTest {
         Assert.assertEquals(Long.valueOf(2),(Long)MyServiceFactory.getTime().get("method2"));
 
     }
+
+    @Test
+    /**
+     * Object.toString() is dispatched to invocation handler
+     */
+    public void testToString(){
+
+        System.out.println(myService.toString());
+        Assert.assertNotNull(MyServiceFactory.getTime().get("toString"));
+    }
+
+    /**
+     * Object.getClass() is not dispatched to invocation handler (since only hashCode, equals and toString are
+     * dispatched)
+     */
+    @Test
+    public void testGetClass(){
+
+        System.out.println(myService.getClass());
+        Assert.assertNull(MyServiceFactory.getTime().get("getClass"));
+    }
 }
