@@ -1,11 +1,10 @@
 package fjab.javatech.dynamicproxy.interception.case2;
 
-import fjab.javatech.dynamicproxy.interception.case2.MyServiceClass;
 import net.sf.cglib.proxy.Enhancer;
-import net.sf.cglib.proxy.InvocationHandler;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,31 +19,24 @@ public class MyServiceFactory {
 
     static MyServiceClass getInstance(){
 
-        return createProxy(MyServiceClass.class,new MyServiceHandler());
+        return createProxy(MyServiceClass.class);
     }
 
-    private static <T> T createProxy(Class<T> tClass,InvocationHandler invocationHandler){
+    private static <T> T createProxy(Class<T> tClass){
 
-        Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(MyServiceClass.class);
-        enhancer.setCallback(invocationHandler);
-        return (T) enhancer.create();
-    }
-
-    private static class MyServiceHandler implements InvocationHandler{
-
-        MyServiceClass myService = new MyServiceClass();
-
-        @Override
-        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        MethodInterceptor methodInterceptor = (Object o, Method method, Object[] args, MethodProxy methodProxy) -> {
             long t = System.currentTimeMillis();
-            Object object  = method.invoke(myService,args);
+            Object object  = methodProxy.invokeSuper(o,args);
             long timeElapsed = (System.currentTimeMillis()-t)/1000;
             time.put(method.getName(),timeElapsed);
 
             return object;
-        }
+        };
+
+        Enhancer enhancer = new Enhancer();
+        return (T) enhancer.create(tClass,methodInterceptor);
     }
+
 
     static Map<String, Long> getTime() {
         return time;
