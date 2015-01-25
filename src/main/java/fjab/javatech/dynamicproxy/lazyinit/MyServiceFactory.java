@@ -12,6 +12,8 @@ import java.lang.reflect.Proxy;
  */
 public class MyServiceFactory {
 
+    private MyServiceFactory(){}
+
     static MyService getInstance(){
 
         return createProxy(MyService.class,new MyServiceHandler());

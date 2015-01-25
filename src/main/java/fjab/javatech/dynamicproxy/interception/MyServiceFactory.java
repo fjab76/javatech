@@ -11,7 +11,9 @@ import java.util.Map;
  */
 public class MyServiceFactory {
 
-    private static Map<String,Long> time = new HashMap();
+    private static Map<String,Long> time = new HashMap<String,Long>();
+
+    private MyServiceFactory(){}
 
     static MyService getInstance(){
 
