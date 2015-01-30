@@ -27,7 +27,7 @@ public class MyServiceFactory {
         MethodInterceptor methodInterceptor = (Object o, Method method, Object[] args, MethodProxy methodProxy) -> {
             long t = System.currentTimeMillis();
             Object object  = methodProxy.invokeSuper(o,args);
-            long timeElapsed = (System.currentTimeMillis()-t)/1000;
+            long timeElapsed = System.currentTimeMillis()-t;
             time.put(method.getName(),timeElapsed);
 
             return object;
