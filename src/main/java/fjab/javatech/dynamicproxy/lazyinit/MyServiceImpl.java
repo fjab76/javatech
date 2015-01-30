@@ -5,16 +5,6 @@ package fjab.javatech.dynamicproxy.lazyinit;
  */
 class MyServiceImpl implements MyService{
 
-    MyServiceImpl(){
-        System.out.println("Constructing MyService object...");
-        try {
-            Thread.currentThread().sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("Object created!!");
-    }
-
     @Override
     public String method1() {
         return "method1";
