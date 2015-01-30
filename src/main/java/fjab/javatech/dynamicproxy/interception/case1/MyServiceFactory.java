@@ -33,7 +33,7 @@ public class MyServiceFactory {
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             long t = System.currentTimeMillis();
             Object object  = method.invoke(myService,args);
-            long timeElapsed = (System.currentTimeMillis()-t)/1000;
+            long timeElapsed = System.currentTimeMillis()-t;
             time.put(method.getName(),timeElapsed);
 
             return object;
