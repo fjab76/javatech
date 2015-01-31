@@ -1,12 +1,12 @@
-package fjab.javatech.dynamicproxy.lazyinit;
+package fjab.javatech.dynamicproxy.lazyinit.case1;
 
+import fjab.javatech.dynamicproxy.lazyinit.case1.MyService;
+import fjab.javatech.dynamicproxy.lazyinit.case1.MyServiceFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.lang.reflect.Proxy;
-
-import static org.junit.Assert.*;
 
 public class MyServiceImplTest {
 

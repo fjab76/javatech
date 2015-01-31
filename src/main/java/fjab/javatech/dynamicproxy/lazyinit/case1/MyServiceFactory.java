@@ -1,7 +1,4 @@
-package fjab.javatech.dynamicproxy.lazyinit;
-
-import fjab.javatech.dynamicproxy.interception.*;
-import fjab.javatech.dynamicproxy.lazyinit.MyServiceImpl;
+package fjab.javatech.dynamicproxy.lazyinit.case1;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
